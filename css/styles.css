@@ -82,10 +82,10 @@ body.ready .split span{animation-play-state:running}
 /* menu */
 .menu{text-align:center}
 .menu h2{margin-inline:auto}
-.tabs{position:relative;display:inline-flex;gap:.3rem;padding:.35rem;border-radius:99px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);margin:1rem 0 2.5rem;flex-wrap:wrap;justify-content:center}
-.tab{position:relative;z-index:2;background:none;border:0;color:var(--mute);font:500 .95rem var(--font-b);padding:.7rem 1.4rem;border-radius:99px;cursor:pointer;transition:color .3s}
-.tab.active,.tab:hover{color:#fff}
-.tab-ink{position:absolute;z-index:1;top:.35rem;bottom:.35rem;left:0;width:0;border-radius:99px;background:linear-gradient(135deg,var(--red),var(--red-d));box-shadow:0 0 22px rgba(225,29,46,.55);transition:left .45s var(--ease),width .45s var(--ease)}
+.tabs{position:relative;display:inline-flex;gap:3rem;border-bottom:1px solid rgba(255,255,255,.12);margin:1.5rem auto 3rem;justify-content:center}
+.tab{position:relative;z-index:2;background:none;border:0;color:var(--mute);font:600 1.1rem var(--font-h);letter-spacing:.04em;padding:.6rem 0 .9rem;cursor:pointer;transition:color .25s ease}
+.tab.active,.tab:hover{color:var(--cream)}
+.tab-ink{position:absolute;z-index:1;bottom:-1px;left:0;height:2px;width:0;background:var(--red);border-radius:0;box-shadow:none;transition:left .35s var(--ease),width .35s var(--ease)}
 .panel{display:none;grid-template-columns:repeat(auto-fit,minmax(260px,340px));gap:1.5rem;justify-content:center}
 .panel.active{display:grid}
 .panel.active .card{animation:cardIn .6s var(--ease) both}
