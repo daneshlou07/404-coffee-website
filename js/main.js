@@ -32,20 +32,13 @@
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
 
-  // Reveal on scroll + counters
+  // Reveal on scroll
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     e.target.classList.add('in-view');
-    $$('[data-count]', e.target).forEach(countUp);
-    if (e.target.matches('[data-count]')) countUp(e.target);
     io.unobserve(e.target);
   }), { threshold: .15 });
   $$('.reveal:not(.hero .reveal),.reveal-left,.reveal-right').forEach(el => io.observe(el));
-  function countUp(el) {
-    if (el.dataset.done) return; el.dataset.done = 1;
-    const to = +el.dataset.count; let n = 0;
-    const t = setInterval(() => { n++; el.textContent = n; if (n >= to) clearInterval(t); }, reduce ? 1 : 90);
-  }
 
   // Menu tabs with sliding ink
   const tabs = $$('.tab'), ink = $('.tab-ink');
@@ -129,24 +122,4 @@
   // Cursor glow
   const glow = $('#cursor-glow');
   addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }, { passive: true });
-
-  // Steam particles
-  const cv = $('#steam'), ctx = cv.getContext('2d');
-  let W, H, ps = [];
-  const size = () => { W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight; };
-  size(); addEventListener('resize', size);
-  const spawn = () => ({ x: Math.random() * W, y: H + 20, r: 20 + Math.random() * 50, vy: .3 + Math.random() * .6, vx: (Math.random() - .5) * .3, a: .0, life: 0 });
-  for (let i = 0; i < 24; i++) { const p = spawn(); p.y = Math.random() * H; p.life = Math.random() * 300; ps.push(p); }
-  (function tick() {
-    ctx.clearRect(0, 0, W, H);
-    ps.forEach((p, i) => {
-      p.y -= p.vy; p.x += p.vx + Math.sin((p.y + i * 40) / 70) * .3; p.life++; p.r += .08;
-      p.a = Math.min(.09, Math.sin(Math.min(p.life / 380, 1) * Math.PI) * .09);
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-      g.addColorStop(0, `rgba(255,120,130,${p.a})`); g.addColorStop(1, 'rgba(255,120,130,0)');
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
-      if (p.y < -p.r || p.life > 380) ps[i] = spawn();
-    });
-    requestAnimationFrame(tick);
-  })();
 })();
