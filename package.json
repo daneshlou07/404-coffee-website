@@ -1,12 +1,9 @@
 {
   "name": "404-coffee-website",
   "version": "1.0.0",
-  "description": "Showcase website for 404 Coffee (@f04coffee), Shah Alam",
+  "description": "404 Coffee Showcase Website",
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve ."
-  },
-  "keywords": ["coffee", "website", "shah-alam", "404-coffee"],
-  "author": "hoomann",
-  "license": "MIT"
+  }
 }

@@ -30,28 +30,14 @@
 <div id="cursor-glow" aria-hidden="true"></div>
 
 <header id="nav">
-  <div class="nav-left">
-    <a href="#top" class="brand" id="nav-brand">
-      <img src="404-coffee-logo.jpg" alt="404 Coffee Logo Badge" class="brand-logo" width="44" height="44">
-      <div class="brand-text">
-        <span class="brand-title"><span class="brand-404">404</span> COFFEE</span>
-        <span class="brand-sub">SHAH ALAM · DAILY 2PM–2AM</span>
-      </div>
-    </a>
-  </div>
-  <nav aria-label="Main" class="nav-links">
+  <a href="#top" class="brand" id="nav-brand"><span class="brand-404">404</span> Coffee</a>
+  <nav aria-label="Main">
     <a href="#about" id="nav-about">About</a>
     <a href="#menu" id="nav-menu">Menu</a>
     <a href="#events" id="nav-events">Events</a>
     <a href="#gallery" id="nav-gallery">Gallery</a>
     <a href="#visit" id="nav-visit">Visit</a>
   </nav>
-  <div class="nav-right">
-    <a href="#visit" class="nav-cta magnetic" id="nav-cta">
-      <span class="nav-cta-dot" aria-hidden="true"></span>
-      <span class="nav-cta-text">Open till 2AM</span>
-    </a>
-  </div>
 </header>
 
 <main id="top">
@@ -60,7 +46,7 @@
   <div class="hero-bg" data-parallax="0.25" style="background-image:url('images/ig/ig-01.jpg')"></div>
   <div class="hero-shade"></div>
   <div class="hero-content">
-    <p class="eyebrow reveal"><span class="eyebrow-dot" aria-hidden="true"></span> Taman TTDI Jaya · Shah Alam</p>
+    <p class="eyebrow reveal">Taman TTDI Jaya · Shah Alam</p>
     <h1 class="split" id="hero-title"><span>Open when</span> <span>everyone else</span> <span class="glitch" data-text="is closed.">is closed.</span></h1>
     <p class="lead reveal">Matcha, coffee, burgers &amp; chocolate under crimson light. Daily, 2PM till 2AM.</p>
     <div class="cta reveal">
@@ -78,12 +64,24 @@
 
 <section class="section about" id="about">
   <div class="about-grid">
-    <div class="about-img reveal-left">
-      <img src="images/ig/ig-13.jpg" alt="Crimson-lit lounge corner at 404 Coffee" loading="lazy" data-parallax-img>
-      <img class="float" src="images/ig/ig-16.jpg" alt="404 Coffee illuminated interior and terrace" loading="lazy">
+    <div class="about-cards reveal-left" id="about-cards" aria-label="404 Coffee interior and exterior views">
+      <div class="about-card is-main" id="about-card-1" role="button" tabindex="-1" aria-label="Crimson-lit lounge corner at 404 Coffee">
+        <img src="images/ig/ig-13.jpg" alt="Crimson-lit lounge corner at 404 Coffee" loading="lazy">
+        <div class="card-swap-hint" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
+          <span>Swap</span>
+        </div>
+      </div>
+      <div class="about-card is-sub" id="about-card-2" role="button" tabindex="0" aria-label="Click to switch photo: 404 Coffee illuminated interior and terrace">
+        <img src="images/ig/ig-16.jpg" alt="404 Coffee illuminated interior and terrace" loading="lazy">
+        <div class="card-swap-hint" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
+          <span>Swap</span>
+        </div>
+      </div>
     </div>
     <div class="about-text">
-      <p class="eyebrow reveal"><span class="eyebrow-dot" aria-hidden="true"></span> 01 / Our Story</p>
+      <p class="eyebrow reveal">Our story</p>
       <h2 class="reveal">A cafe that glows after dark.</h2>
       <p class="reveal">404 Coffee is where the city's night owls land. Red neon, raw concrete and a slow-pour of good coffee. Come for matcha and burgers, stay for the late hours, the chess nights and the bar takeovers.</p>
     </div>
@@ -91,7 +89,7 @@
 </section>
 
 <section class="section menu" id="menu">
-  <p class="eyebrow reveal"><span class="eyebrow-dot" aria-hidden="true"></span> 02 / Curated Menu</p>
+  <p class="eyebrow reveal">The menu</p>
   <h2 class="reveal">Pick your poison.</h2>
   <div class="tabs reveal" role="tablist" aria-label="Menu categories">
     <button role="tab" class="tab active" data-tab="matcha" id="tab-matcha">Matcha</button>
@@ -116,7 +114,7 @@
 <section class="section events" id="events">
   <div class="events-grid">
     <div class="events-text">
-      <p class="eyebrow reveal"><span class="eyebrow-dot" aria-hidden="true"></span> 03 / Weddings &amp; Events</p>
+      <p class="eyebrow reveal">Weddings &amp; Events</p>
       <h2 class="reveal">Your night, in our red glow.</h2>
       <p class="reveal">From intimate weddings to bar takeovers and chess nights, 404 Coffee is a moody, photogenic venue with in-house catering from our kitchen.</p>
       <ul class="reveal checks">
@@ -141,7 +139,7 @@
 </section>
 
 <section class="section gallery" id="gallery">
-  <p class="eyebrow reveal"><span class="eyebrow-dot" aria-hidden="true"></span> 04 / Live from the Bar · @f04coffee</p>
+  <p class="eyebrow reveal">@f04coffee</p>
   <h2 class="reveal">Straight from the feed.</h2>
   <div class="masonry" id="masonry"></div>
   <p class="center reveal"><a class="btn btn-ghost magnetic" id="ig-link" href="https://www.instagram.com/f04coffee/" target="_blank" rel="noopener">Follow on Instagram</a></p>
@@ -150,7 +148,7 @@
 <section class="section visit" id="visit">
   <div class="visit-grid">
     <div>
-      <p class="eyebrow reveal"><span class="eyebrow-dot" aria-hidden="true"></span> 05 / Location &amp; Hours</p>
+      <p class="eyebrow reveal">Visit us</p>
       <h2 class="reveal">Find the error.</h2>
       <address class="reveal">U1, 16, Glenpark, Jalan Juruwang A U1/A,<br>Seksyen U1, Taman TTDI Jaya,<br>40150 Shah Alam, Selangor</address>
       <table class="hours reveal"><tbody>
