@@ -32,6 +32,24 @@
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
 
+  // Mobile nav drawer (ZUS-style quick navigator)
+  const navToggle = $('#nav-toggle'), mobileMenu = $('#mobile-menu');
+  if (navToggle && mobileMenu) {
+    const toggleMenu = (open) => {
+      const isOpen = open !== undefined ? open : !mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+    navToggle.addEventListener('click', () => toggleMenu());
+    $$('#mobile-menu nav a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+    addEventListener('keydown', e => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) toggleMenu(false);
+    });
+  }
+
   // Reveal on scroll
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
@@ -98,6 +116,63 @@
   const initInk = () => moveInk($('.tab.active'));
   addEventListener('resize', initInk);
   document.fonts.ready.then(initInk); initInk();
+
+  // Menu stories carousel
+  $$('.panel').forEach(panel => {
+    const cards = $$('.card', panel), n = cards.length;
+    let cur = 0;
+
+    cards.forEach((c, i) => {
+      const bars = document.createElement('div');
+      bars.className = 'bars';
+      bars.setAttribute('aria-hidden', 'true');
+      bars.innerHTML = cards.map((_, j) => `<span class="seg${j < i ? ' done' : j === i ? ' cur' : ''}"><i></i></span>`).join('');
+      c.prepend(bars);
+    });
+
+    const mk = (cls, label, txt) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'story-nav ' + cls; b.setAttribute('aria-label', label); b.textContent = txt;
+      panel.appendChild(b); return b;
+    };
+    const prevBtn = mk('story-prev', 'Previous item', '‹'), nextBtn = mk('story-next', 'Next item', '›');
+
+    const place = () => cards.forEach((c, i) => {
+      const d = (i - cur + n) % n;
+      const pos = d === 0 ? 0 : d === 1 ? 1 : d === n - 1 ? -1 : 2;
+      const old = c.dataset.pos;
+      if (old !== undefined && Math.abs(+old - pos) === 2) {
+        c.style.transition = 'none';
+        c.dataset.pos = pos;
+        void c.offsetWidth;
+        c.style.transition = '';
+      } else c.dataset.pos = pos;
+      c.setAttribute('aria-hidden', pos === 0 ? 'false' : 'true');
+    });
+    const go = i => { cur = (i + n) % n; place(); };
+    place();
+
+    prevBtn.addEventListener('click', () => go(cur - 1));
+    nextBtn.addEventListener('click', () => go(cur + 1));
+    cards.forEach((c, i) => c.addEventListener('click', e => {
+      if (swiped) { swiped = false; return; }
+      if (i !== cur) return go(i);
+      const r = c.getBoundingClientRect();
+      go((e.clientX - r.left) < r.width * .35 ? cur - 1 : cur + 1);
+    }));
+
+    if (!reduce) panel.addEventListener('animationend', e => { if (e.animationName === 'storyfill') go(cur + 1); });
+
+    let sx = null, swiped = false;
+    panel.addEventListener('pointerdown', e => { sx = e.clientX; swiped = false; });
+    panel.addEventListener('pointerup', e => {
+      if (sx === null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 50) { swiped = true; go(cur + (dx < 0 ? 1 : -1)); }
+    });
+
+    new IntersectionObserver(es => es.forEach(e => panel.classList.toggle('is-off', !e.isIntersecting)), { threshold: .35 }).observe(panel);
+  });
 
   // Gallery (ordered chronologically as posted on @f04coffee feed)
   const gal = [

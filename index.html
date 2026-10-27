@@ -38,8 +38,26 @@
     <a href="#gallery" id="nav-gallery">Gallery</a>
     <a href="#visit" id="nav-visit">Visit</a>
   </nav>
-  <div class="nav-right" aria-hidden="true"></div>
+  <div class="nav-right">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+  </div>
 </header>
+
+<div id="mobile-menu" aria-hidden="true">
+  <nav aria-label="Mobile">
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#events">Events</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <div class="mm-foot">
+    <p>Daily, 2PM – 2AM<br>Taman TTDI Jaya, Shah Alam</p>
+    <a class="social" href="https://www.instagram.com/f04coffee/" target="_blank" rel="noopener" aria-label="404 Coffee on Instagram">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+</div>
 
 <main id="top">
 
@@ -91,15 +109,15 @@
   </div>
 
   <div class="panels">
-    <div class="panel active" id="panel-matcha">
-      <article class="card tilt"><img src="images/ig/ig-09.jpg" alt="Ajisai Matcha Latte" loading="lazy"><div><h3>Ajisai Matcha Latte</h3><p>Ceremonial-style matcha, silky milk, served in a ribbed glass.</p></div></article>
-      <article class="card tilt"><img src="images/ig/ig-14.jpg" alt="Cloud Matcha Earl Grey" loading="lazy"><div><h3>Cloud Matcha Earl Grey</h3><p>Earl Grey base layered with a matcha cloud.</p></div></article>
-      <article class="card tilt"><img src="images/ig/ig-11.jpg" alt="Matcha from above" loading="lazy"><div><h3>Matcha, up close</h3><p>Fresh from the 404 bar.</p></div></article>
+    <div class="panel active" id="panel-matcha" aria-roledescription="carousel" aria-label="Matcha menu">
+      <article class="card"><img src="images/ig/ig-09.jpg" alt="Ajisai Matcha Latte" loading="lazy"><div class="caption"><h3>Ajisai Matcha Latte</h3><p>Ceremonial-style matcha, silky milk, served in a ribbed glass.</p></div></article>
+      <article class="card"><img src="images/ig/ig-14.jpg" alt="Cloud Matcha Earl Grey" loading="lazy"><div class="caption"><h3>Cloud Matcha Earl Grey</h3><p>Earl Grey base layered with a matcha cloud.</p></div></article>
+      <article class="card"><img src="images/ig/ig-11.jpg" alt="Matcha from above" loading="lazy"><div class="caption"><h3>Matcha, up close</h3><p>Fresh from the 404 bar.</p></div></article>
     </div>
-    <div class="panel" id="panel-coffee">
-      <article class="card tilt"><img src="images/ig/ig-15.jpg" alt="Iced Latte" loading="lazy"><div><h3>Iced Latte</h3><p>Smooth espresso over ice and cold milk.</p></div></article>
-      <article class="card tilt"><img src="images/ig/ig-31.jpg" alt="Barista at the espresso machine" loading="lazy"><div><h3>From the Bar</h3><p>Espresso-based classics pulled fresh.</p></div></article>
-      <article class="card tilt"><img src="images/ig/ig-05.jpg" alt="Perfect Error by 404 Coffee" loading="lazy"><div><h3>Perfect Error</h3><p>By 404 Coffee.</p></div></article>
+    <div class="panel" id="panel-coffee" aria-roledescription="carousel" aria-label="Coffee menu">
+      <article class="card"><img src="images/ig/ig-15.jpg" alt="Iced Latte" loading="lazy"><div class="caption"><h3>Iced Latte</h3><p>Smooth espresso over ice and cold milk.</p></div></article>
+      <article class="card"><img src="images/ig/ig-31.jpg" alt="Barista at the espresso machine" loading="lazy"><div class="caption"><h3>From the Bar</h3><p>Espresso-based classics pulled fresh.</p></div></article>
+      <article class="card"><img src="images/ig/ig-05.jpg" alt="Perfect Error by 404 Coffee" loading="lazy"><div class="caption"><h3>Perfect Error</h3><p>By 404 Coffee.</p></div></article>
     </div>
   </div>
 </section>
