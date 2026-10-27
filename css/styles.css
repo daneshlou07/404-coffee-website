@@ -187,8 +187,7 @@ body.ready .split span{animation-play-state:running}
 @keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.96)}}
 .card{position:relative;text-align:left;border-radius:22px;overflow:hidden;background:var(--bg2);border:1px solid rgba(255,255,255,.07);transition:box-shadow .4s,border-color .4s;transform-style:preserve-3d}
 .card:hover{border-color:rgba(225,29,46,.6);box-shadow:0 20px 60px rgba(225,29,46,.25)}
-.card img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .8s var(--ease)}
-.card:hover img{transform:scale(1.08)}
+.card img{width:100%;aspect-ratio:4/5;object-fit:cover}
 .card div{padding:1.1rem 1.3rem 1.4rem}
 .card h3{font:600 1.15rem var(--font-h)}
 .card p{font-size:.85rem;color:var(--mute);margin-top:.2rem}
