@@ -310,7 +310,7 @@ footer a{color:var(--glow)}
   }
   #mobile-menu nav a:active,#mobile-menu nav a:hover{color:var(--red);transform:translateX(6px)}
   .mm-foot{
-    border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;
+    padding-top:1.5rem;
     display:flex;justify-content:space-between;align-items:center;
     color:var(--mute);font-size:.85rem;line-height:1.4;
   }
