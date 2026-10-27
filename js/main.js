@@ -51,23 +51,28 @@
       const incoming = c1IsMain ? card2 : card1;
       const outgoing = c1IsMain ? card1 : card2;
 
-      incoming.classList.remove('is-sub', 'swap-to-sub');
-      outgoing.classList.remove('is-main', 'swap-to-main');
-      incoming.classList.add('swap-to-main');
-      outgoing.classList.add('swap-to-sub');
+      // Ensure incoming card stays on top during the smooth transition
+      incoming.classList.add('is-incoming');
+      outgoing.classList.add('is-outgoing');
 
+      // Trigger continuous CSS transition
+      incoming.classList.remove('is-sub');
+      incoming.classList.add('is-main');
+      outgoing.classList.remove('is-main');
+      outgoing.classList.add('is-sub');
+
+      incoming.setAttribute('tabindex', '-1');
+      outgoing.setAttribute('tabindex', '0');
+      const inImg = incoming.querySelector('img'), outImg = outgoing.querySelector('img');
+      if (inImg) incoming.setAttribute('aria-label', inImg.alt);
+      if (outImg) outgoing.setAttribute('aria-label', 'Click to switch photo: ' + outImg.alt);
+
+      // Clean up layer classes once transition completes
       setTimeout(() => {
-        incoming.classList.remove('swap-to-main');
-        outgoing.classList.remove('swap-to-sub');
-        incoming.classList.add('is-main');
-        outgoing.classList.add('is-sub');
-        incoming.setAttribute('tabindex', '-1');
-        outgoing.setAttribute('tabindex', '0');
-        const inImg = incoming.querySelector('img'), outImg = outgoing.querySelector('img');
-        if (inImg) incoming.setAttribute('aria-label', inImg.alt);
-        if (outImg) outgoing.setAttribute('aria-label', 'Click to switch photo: ' + outImg.alt);
+        incoming.classList.remove('is-incoming');
+        outgoing.classList.remove('is-outgoing');
         swapping = false;
-      }, 650);
+      }, 820);
     };
 
     card1.addEventListener('click', () => { if (card1.classList.contains('is-sub')) swapCards(); });
