@@ -3,6 +3,7 @@
   --cream:#f4ece6; --mute:#b9a9a6; --steel:#9aa0a6;
   --font-h:'Space Grotesk',system-ui,sans-serif; --font-b:'Inter',system-ui,sans-serif;
   --ease:cubic-bezier(.2,.8,.2,1);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{
   scroll-behavior:smooth;

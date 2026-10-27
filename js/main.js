@@ -9,14 +9,22 @@
   let mi = 0;
   const msgEl = $('#pre-msg');
   const msgTimer = setInterval(() => { mi = Math.min(mi + 1, msgs.length - 1); msgEl.textContent = msgs[mi]; }, 520);
+  let hidden = false;
   const hidePre = () => {
+    if (hidden) return;
+    hidden = true;
     clearInterval(msgTimer);
     $('#preloader').classList.add('done');
     document.body.classList.remove('loading');
     document.body.classList.add('ready');
     $$('.hero .reveal').forEach((e, i) => setTimeout(() => e.classList.add('in-view'), 600 + i * 150));
   };
-  window.addEventListener('load', () => setTimeout(hidePre, reduce ? 0 : 2100));
+  if (document.readyState === 'complete') {
+    setTimeout(hidePre, reduce ? 0 : 2100);
+  } else {
+    window.addEventListener('load', () => setTimeout(hidePre, reduce ? 0 : 2100));
+    setTimeout(hidePre, 3500);
+  }
 
   // Nav + progress + parallax
   const nav = $('#nav'), prog = $('#progress');
