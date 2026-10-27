@@ -39,7 +39,6 @@ body.loading{overflow:hidden}
 #nav.scrolled{
   height:68px;
   background:rgba(10,6,7,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,.08);
   box-shadow:0 10px 30px rgba(0,0,0,.45);
 }
 .brand{justify-self:start;font:700 1.45rem var(--font-h);letter-spacing:.02em;display:inline-flex;align-items:center}
