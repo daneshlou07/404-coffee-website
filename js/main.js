@@ -66,52 +66,6 @@
   }), { threshold: .15 });
   $$('.reveal:not(.hero .reveal),.reveal-left,.reveal-right').forEach(el => io.observe(el));
 
-  // About photo cards swap
-  const card1 = $('#about-card-1'), card2 = $('#about-card-2');
-  if (card1 && card2) {
-    let swapping = false;
-    const swapCards = () => {
-      if (swapping) return;
-      swapping = true;
-      const c1IsMain = card1.classList.contains('is-main');
-      const incoming = c1IsMain ? card2 : card1;
-      const outgoing = c1IsMain ? card1 : card2;
-
-      // Ensure incoming card stays on top during the smooth transition
-      incoming.classList.add('is-incoming');
-      outgoing.classList.add('is-outgoing');
-
-      // Trigger continuous CSS transition
-      incoming.classList.remove('is-sub');
-      incoming.classList.add('is-main');
-      outgoing.classList.remove('is-main');
-      outgoing.classList.add('is-sub');
-
-      incoming.setAttribute('tabindex', '-1');
-      outgoing.setAttribute('tabindex', '0');
-      const inImg = incoming.querySelector('img'), outImg = outgoing.querySelector('img');
-      if (inImg) incoming.setAttribute('aria-label', inImg.alt);
-      if (outImg) outgoing.setAttribute('aria-label', 'Click to switch photo: ' + outImg.alt);
-
-      // Clean up layer classes once transition completes
-      setTimeout(() => {
-        incoming.classList.remove('is-incoming');
-        outgoing.classList.remove('is-outgoing');
-        swapping = false;
-      }, 820);
-    };
-
-    card1.addEventListener('click', () => { if (card1.classList.contains('is-sub')) swapCards(); });
-    card2.addEventListener('click', () => { if (card2.classList.contains('is-sub')) swapCards(); });
-    [card1, card2].forEach(c => {
-      c.addEventListener('keydown', e => {
-        if ((e.key === 'Enter' || e.key === ' ') && c.classList.contains('is-sub')) {
-          e.preventDefault();
-          swapCards();
-        }
-      });
-    });
-  }
 
   // Menu tabs with sliding ink
   const tabs = $$('.tab'), ink = $('.tab-ink');
