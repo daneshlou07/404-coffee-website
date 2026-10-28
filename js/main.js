@@ -163,7 +163,7 @@
     prevBtn.addEventListener('click', () => go(cur - 1));
     nextBtn.addEventListener('click', () => go(cur + 1));
     cards.forEach((c, i) => c.addEventListener('click', e => {
-      if (swiped) { swiped = false; return; }
+      if (swiped) return;
       if (i !== cur) return go(i);
       const r = c.getBoundingClientRect();
       go((e.clientX - r.left) < r.width * .35 ? cur - 1 : cur + 1);
@@ -171,13 +171,65 @@
 
     if (!reduce) panel.addEventListener('animationend', e => { if (e.animationName === 'storyfill') go(cur + 1); });
 
-    let sx = null, swiped = false;
-    panel.addEventListener('pointerdown', e => { sx = e.clientX; swiped = false; });
-    panel.addEventListener('pointerup', e => {
-      if (sx === null) return;
-      const dx = e.clientX - sx; sx = null;
-      if (Math.abs(dx) > 50) { swiped = true; go(cur + (dx < 0 ? 1 : -1)); }
+    // Touch & swipe handling for mobile (Android & iOS) + desktop mouse drag
+    let startX = 0, startY = 0, lastX = 0, lastY = 0, startTime = 0;
+    let swiped = false;
+
+    const startSwipe = (x, y) => {
+      startX = lastX = x;
+      startY = lastY = y;
+      startTime = Date.now();
+    };
+    const moveSwipe = (x, y) => {
+      lastX = x;
+      lastY = y;
+    };
+    const endSwipe = () => {
+      if (startX === 0) return;
+      const dx = lastX - startX;
+      const dy = lastY - startY;
+      const dt = Date.now() - startTime;
+      startX = 0;
+
+      const isHorizontal = Math.abs(dx) > Math.abs(dy) * 1.15;
+      const isDistance = Math.abs(dx) > 35;
+      const isFlick = dt < 300 && Math.abs(dx) > 20;
+
+      if (isHorizontal && (isDistance || isFlick)) {
+        swiped = true;
+        setTimeout(() => { swiped = false; }, 350);
+        go(cur + (dx < 0 ? 1 : -1));
+      }
+    };
+
+    panel.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) startSwipe(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+
+    panel.addEventListener('touchmove', e => {
+      if (e.touches.length === 1) moveSwipe(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+
+    panel.addEventListener('touchend', e => {
+      if (e.changedTouches.length > 0) {
+        lastX = e.changedTouches[0].clientX;
+        lastY = e.changedTouches[0].clientY;
+      }
+      endSwipe();
+    }, { passive: true });
+
+    panel.addEventListener('touchcancel', () => { startX = 0; }, { passive: true });
+
+    panel.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse') startSwipe(e.clientX, e.clientY);
     });
+    panel.addEventListener('pointermove', e => {
+      if (e.pointerType === 'mouse' && startX !== 0) moveSwipe(e.clientX, e.clientY);
+    });
+    panel.addEventListener('pointerup', e => {
+      if (e.pointerType === 'mouse') endSwipe();
+    });
+    panel.addEventListener('pointercancel', () => { startX = 0; });
 
     new IntersectionObserver(es => es.forEach(e => panel.classList.toggle('is-off', !e.isIntersecting)), { threshold: .35 }).observe(panel);
   });
