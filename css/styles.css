@@ -245,30 +245,7 @@ body.ready .split span{animation-play-state:running}
 .checks{list-style:none;margin:1.5rem 0}
 .checks li{padding-left:1.8rem;position:relative;margin:.5rem 0}
 .checks li::before{content:"✦";position:absolute;left:0;color:var(--red)}
-#enquiry{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;max-width:520px;margin-top:1.5rem}
-#enquiry input,#enquiry select{padding:.9rem 1rem;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--cream);font:inherit;transition:border-color .3s,box-shadow .3s}
-#enquiry input:focus,#enquiry select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(225,29,46,.25)}
-#enquiry select option{background:#150b0d}
-#enquiry select,#f-submit,.form-msg{grid-column:1/-1}
-#f-submit{border:0;cursor:pointer;color:#fff}
-.form-msg{font-size:.85rem;min-height:1.2em;color:var(--glow)}
-.invalid{border-color:var(--red)!important}
-.events-direct{margin-top:1.4rem;max-width:520px}
-.direct-label{display:block;font-size:.82rem;color:var(--mute);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.65rem;font-weight:500}
-.direct-links{display:flex;gap:.6rem;flex-wrap:wrap}
-.direct-pill{
-  display:inline-flex;align-items:center;gap:.45rem;
-  padding:.55rem 1rem;border-radius:99px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
-  color:var(--cream);font-size:.85rem;font-weight:500;
-  transition:background .25s,border-color .25s,color .25s,transform .25s var(--ease);
-}
-.direct-pill:hover{
-  background:rgba(225,29,46,.15);border-color:var(--red);color:#fff;
-  transform:translateY(-2px);
-}
-.direct-pill svg{opacity:.85}
-.direct-pill:hover svg{opacity:1}
+#events-wa{margin-top:1.2rem;display:inline-block}
 .events-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .events-imgs img{width:100%;border-radius:18px;object-fit:cover;aspect-ratio:3/4;transition:transform .6s var(--ease)}
 .events-imgs img:last-child{grid-column:span 2;aspect-ratio:16/9}
@@ -370,7 +347,6 @@ footer a{color:var(--glow)}
   .about-cards{width:100%;max-width:100%;overflow:hidden}
   .about-card.is-sub{transform:translate3d(0,4%,0) scale(0.44);right:0;left:auto}
   .about-card.is-sub:hover{transform:translate3d(0,2%,0) scale(0.46)}
-  #enquiry{grid-template-columns:1fr;width:100%;max-width:100%}
   .panels{--cw:min(72vw,300px);overflow:hidden;width:100%;max-width:100%;touch-action:pan-y}
   .menu{overflow-x:hidden;width:100%;max-width:100%}
   .story-nav{display:none}

@@ -271,44 +271,6 @@
     if (e.key === 'ArrowRight') openLb(cur + 1);
   });
 
-  // Enquiry form -> WhatsApp routing
-  const enquiryForm = $('#enquiry');
-  if (enquiryForm) {
-    enquiryForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const n = $('#f-name'), p = $('#f-phone'), t = $('#f-type'), m = $('#form-msg');
-      const name = n.value.trim();
-      const phone = p.value.trim();
-      const eventType = t ? t.value : 'Event';
-
-      const okN = name.length > 0;
-      const okP = phone.length > 0;
-
-      m.style.color = 'var(--glow)';
-      m.textContent = 'Opening WhatsApp…';
-
-      let text = '';
-      if (okN && okP) {
-        text = `Hi 404 Coffee! I would like to enquire about hosting an event at 404:\n\n• Name: ${name}\n• Contact: ${phone}\n• Event: ${eventType}\n\nLooking forward to hearing from you!`;
-      } else if (okN) {
-        text = `Hi 404 Coffee! My name is ${name}. I would like to enquire about hosting an event (${eventType}) at 404 Coffee.`;
-      } else {
-        text = `Hi 404 Coffee! I would like to enquire about hosting an event (${eventType}) at 404 Coffee.`;
-      }
-
-      const waUrl = `https://wa.me/60127772451?text=${encodeURIComponent(text)}`;
-
-      setTimeout(() => {
-        window.open(waUrl, '_blank', 'noopener,noreferrer');
-        m.textContent = 'Enquiry opened in WhatsApp! You can also call or DM us below.';
-      }, 250);
-    });
-
-    ['#f-name', '#f-phone'].forEach(sel => {
-      const el = $(sel);
-      if (el) el.addEventListener('input', () => el.classList.remove('invalid'));
-    });
-  }
 
   if (reduce) return;
 
