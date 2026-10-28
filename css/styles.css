@@ -253,6 +253,22 @@ body.ready .split span{animation-play-state:running}
 #f-submit{border:0;cursor:pointer;color:#fff}
 .form-msg{font-size:.85rem;min-height:1.2em;color:var(--glow)}
 .invalid{border-color:var(--red)!important}
+.events-direct{margin-top:1.4rem;max-width:520px}
+.direct-label{display:block;font-size:.82rem;color:var(--mute);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.65rem;font-weight:500}
+.direct-links{display:flex;gap:.6rem;flex-wrap:wrap}
+.direct-pill{
+  display:inline-flex;align-items:center;gap:.45rem;
+  padding:.55rem 1rem;border-radius:99px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  color:var(--cream);font-size:.85rem;font-weight:500;
+  transition:background .25s,border-color .25s,color .25s,transform .25s var(--ease);
+}
+.direct-pill:hover{
+  background:rgba(225,29,46,.15);border-color:var(--red);color:#fff;
+  transform:translateY(-2px);
+}
+.direct-pill svg{opacity:.85}
+.direct-pill:hover svg{opacity:1}
 .events-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .events-imgs img{width:100%;border-radius:18px;object-fit:cover;aspect-ratio:3/4;transition:transform .6s var(--ease)}
 .events-imgs img:last-child{grid-column:span 2;aspect-ratio:16/9}

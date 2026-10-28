@@ -271,14 +271,45 @@
     if (e.key === 'ArrowRight') openLb(cur + 1);
   });
 
-  // Enquiry form (front-end demo)
-  $('#enquiry').addEventListener('submit', e => {
-    e.preventDefault();
-    const n = $('#f-name'), p = $('#f-phone'), m = $('#form-msg');
-    const okN = n.value.trim().length > 1, okP = /^[+\d][\d\s-]{6,}$/.test(p.value.trim());
-    n.classList.toggle('invalid', !okN); p.classList.toggle('invalid', !okP);
-    m.textContent = okN && okP ? `Thanks ${n.value.trim()}! We'll get back to you soon. (demo form)` : 'Please enter your name and a valid phone number.';
-  });
+  // Enquiry form -> WhatsApp routing
+  const enquiryForm = $('#enquiry');
+  if (enquiryForm) {
+    enquiryForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const n = $('#f-name'), p = $('#f-phone'), t = $('#f-type'), m = $('#form-msg');
+      const name = n.value.trim();
+      const phone = p.value.trim();
+      const eventType = t ? t.value : 'Event';
+
+      const okN = name.length > 1;
+      const okP = /^[+\d][\d\s-]{6,}$/.test(phone);
+
+      n.classList.toggle('invalid', !okN);
+      p.classList.toggle('invalid', !okP);
+
+      if (!okN || !okP) {
+        m.style.color = 'var(--red)';
+        m.textContent = 'Please enter your name and a valid phone number.';
+        return;
+      }
+
+      m.style.color = 'var(--glow)';
+      m.textContent = 'Opening WhatsApp with your enquiry details…';
+
+      const text = `Hi 404 Coffee! I would like to enquire about hosting an event at 404:\n\n• Name: ${name}\n• Contact: ${phone}\n• Event: ${eventType}\n\nLooking forward to hearing from you!`;
+      const waUrl = `https://wa.me/60127772451?text=${encodeURIComponent(text)}`;
+
+      setTimeout(() => {
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+        m.textContent = 'Enquiry opened in WhatsApp! You can also call or DM us below.';
+      }, 350);
+    });
+
+    ['#f-name', '#f-phone'].forEach(sel => {
+      const el = $(sel);
+      if (el) el.addEventListener('input', () => el.classList.remove('invalid'));
+    });
+  }
 
   if (reduce) return;
 
