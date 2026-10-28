@@ -281,28 +281,27 @@
       const phone = p.value.trim();
       const eventType = t ? t.value : 'Event';
 
-      const okN = name.length > 1;
-      const okP = /^[+\d][\d\s-]{6,}$/.test(phone);
-
-      n.classList.toggle('invalid', !okN);
-      p.classList.toggle('invalid', !okP);
-
-      if (!okN || !okP) {
-        m.style.color = 'var(--red)';
-        m.textContent = 'Please enter your name and a valid phone number.';
-        return;
-      }
+      const okN = name.length > 0;
+      const okP = phone.length > 0;
 
       m.style.color = 'var(--glow)';
-      m.textContent = 'Opening WhatsApp with your enquiry details…';
+      m.textContent = 'Opening WhatsApp…';
 
-      const text = `Hi 404 Coffee! I would like to enquire about hosting an event at 404:\n\n• Name: ${name}\n• Contact: ${phone}\n• Event: ${eventType}\n\nLooking forward to hearing from you!`;
+      let text = '';
+      if (okN && okP) {
+        text = `Hi 404 Coffee! I would like to enquire about hosting an event at 404:\n\n• Name: ${name}\n• Contact: ${phone}\n• Event: ${eventType}\n\nLooking forward to hearing from you!`;
+      } else if (okN) {
+        text = `Hi 404 Coffee! My name is ${name}. I would like to enquire about hosting an event (${eventType}) at 404 Coffee.`;
+      } else {
+        text = `Hi 404 Coffee! I would like to enquire about hosting an event (${eventType}) at 404 Coffee.`;
+      }
+
       const waUrl = `https://wa.me/60127772451?text=${encodeURIComponent(text)}`;
 
       setTimeout(() => {
         window.open(waUrl, '_blank', 'noopener,noreferrer');
         m.textContent = 'Enquiry opened in WhatsApp! You can also call or DM us below.';
-      }, 350);
+      }, 250);
     });
 
     ['#f-name', '#f-phone'].forEach(sel => {
